@@ -11,25 +11,15 @@ def information_parser(link_list:list):
         response = requests.get(product, headers=HEADERS)
         soup = BeautifulSoup(response.content, 'html.parser')
         print('Name —{}'.format(soup.find('h1', class_='product__title').get_text()))
-        try:
-            base_list.append(
-                [
-                    'Name —{}'.format(soup.find('h1', class_='product__title').get_text()), " "
-                    'Cod product — {}'.format(int((soup.find('p', class_='product__code detail-code').get_text()[-10:].replace(' ', '')))), " "
-                    'Link product — {}'.format(product), " "
-                    'Link photo — {}'.format(soup.find('img', class_='picture-container__picture').get('src')), " "
-                    'Features — {}'.format(soup.find('p', class_='product-about__brief ng-star-inserted').get_text())
-                ]
-            )
-        except:
-            base_list.append(
-                [
-                    'Name —{}'.format(soup.find('h1', class_='product__title').get_text()), " "
-                    'Cod product — {}'.format(int((soup.find('p', class_='product__code detail-code').get_text(strip=True)[-10:]))), " "
-                    'Link product — {}'.format(product), " "
-                    'Link photo — {}'.format(soup.find('img', class_='picture-container__picture').get('src'))
-                ]
-            )
+        base_list.append(
+            [
+                'Name —{}'.format(soup.find('h1', class_='product__title').get_text()), " "
+                'Cod product — {}'.format(int((soup.find('p', class_='product__code detail-code').get_text()[-10:].replace(' ', '')))), " "
+                'Link product — {}'.format(product), " "
+                'Link photo — {}'.format(soup.find('img', class_='picture-container__picture').get('src')), " "
+                'Features — {}'.format(soup.find('p', class_='product-about__brief ng-star-inserted').get_text())
+            ]
+        )
     return base_list
 
 
